@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 interface ProfileProps {}
 const avatar="obrazek";
-const name="Szymon"
+const name="Szymon";
 
 const Profile: FC<ProfileProps> = () => (
   <div className="Profile d-flex flex-row mx-1">

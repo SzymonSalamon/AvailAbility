@@ -1,15 +1,16 @@
 import React, { FC } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Profile from '../Profile/Profile.tsx';
+
 interface NaviBarProps {}
 
 const NaviBar: FC<NaviBarProps> = () => (
-  <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+  <nav className="navbar navbar-expand-lg navbar-dark bg-dark mb-1">
   <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
     <span className="navbar-toggler-icon"></span>
   </button>
   <a className="navbar-brand" href="#">
-    <Profile></Profile>
+  <Profile></Profile>
 </a>
 
   <div className="collapse navbar-collapse position-relative" id="navbarTogglerDemo03">
