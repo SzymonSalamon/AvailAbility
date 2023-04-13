@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Profile from '../Profile/Profile.tsx';
-
 interface NaviBarProps {}
 
 const NaviBar: FC<NaviBarProps> = () => (
@@ -16,13 +15,13 @@ const NaviBar: FC<NaviBarProps> = () => (
   <div className="collapse navbar-collapse position-relative" id="navbarTogglerDemo03">
     <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
       <li className="nav-item active">
-        <a className="nav-link" href="#">Home <span className="sr-only">(current)</span></a>
+        <a className="nav-link" href="#">Home <span className="sr-only"></span></a>
       </li>
       <li className="nav-item">
-        <a className="nav-link" href="#">Link</a>
+        <a className="nav-link" href="#">Workers</a>
       </li>
       <li className="nav-item">
-        <a className="nav-link disabled" href="#">Disabled</a>
+        <a className="nav-link" href="#">Amount</a>
       </li>
     </ul>
     <form className="form-inline my-2 my-lg-0 d-flex position-absolute end-0">

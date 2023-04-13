@@ -37,6 +37,16 @@ class Calendar extends Component {
           text: modal.result
         });
       },
+     /* 
+  "<input type=radio name="+ args.data.id +"/>"
+</label>*/
+      onBeforeEventRender: args => {
+        args.data.areas = [
+          {right: 0, bottom: 36, html: "<label class='container'><input type='checkbox' checked='checked' name='accept."+ args.data.id +"'/><div class='checkmark green'></div>"},
+          {right: 0, bottom: 6, html: "<label class='container'><input type='checkbox' name='notaccept."+ args.data.id +"'/><div class='checkmark red'></div>"},
+          ];
+      },
+    
       eventDeleteHandling: "Update",
       onEventClick: async args => {
         const dp = this.calendar;
@@ -58,34 +68,31 @@ class Calendar extends Component {
     const events = [
       {
         id: 1,
-        text: "Event 1",
+        text: " ",
         start: "2023-03-07T10:30:00",
         end: "2023-03-07T13:00:00"
       },
       {
         id: 2,
-        text: "Event 2",
+        text: " ",
         start: "2023-03-08T09:30:00",
         end: "2023-03-08T11:30:00",
-        backColor: "#6aa84f"
       },
       {
         id: 3,
-        text: "Event 3",
+        text: " ",
         start: "2023-03-08T12:00:00",
         end: "2023-03-08T15:00:00",
-        backColor: "#f1c232"
       },
       {
         id: 4,
-        text: "Event 4",
+        text: " ",
         start: "2023-03-06T11:30:00",
         end: "2023-03-06T14:30:00",
-        backColor: "#cc4125"
       },
     ];
-
-    const startDate = "2023-03-07";
+    const now = new Date();
+    const startDate = now.toLocaleDateString();
 
     this.calendar.update({startDate, events});
   }
