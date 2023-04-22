@@ -1,0 +1,23 @@
+version: '3'
+version: '3'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: availability/Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+    links:
+      - phpdocke-
+  php:
+    build:
+      context: .
+      dockerfile: Symfony/Dockerfile
+    ports:
+      - "9000:9000"
+    volumes:
+      - ./api:/app
+
