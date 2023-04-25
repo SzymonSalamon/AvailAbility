@@ -1,23 +1,21 @@
 version: '3'
-version: '3'
-
 services:
-  web:
-    build:
-      context: .
-      dockerfile: availability/Dockerfile
+  dbpostgresql:
+    image: postgres:15
     ports:
-      - "3000:3000"
-    volumes:
-      - .:/app
-    links:
-      - phpdocke-
-  php:
-    build:
-      context: .
-      dockerfile: Symfony/Dockerfile
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=avapassword
+      - POSTGRES_USER=avauser
+      - POSTGRES_DB=avab
+  frontend:
+    build: ./availability
     ports:
-      - "9000:9000"
-    volumes:
-      - ./api:/app
+      - '3000:3000'
+  backend:
+    build: ./AvabilityB
+    ports:
+      - '8080:8080'
+
+ 
 

@@ -8,6 +8,7 @@ class AvabilityBApplicationTests {
 
     @Test
     void contextLoads() {
+
     }
 
 }

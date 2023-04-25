@@ -1,0 +1,99 @@
+create table "Menagers"
+(
+    manager_id integer generated always as identity
+        constraint "Menagers_pk"
+            primary key,
+    name       varchar(50)  not null,
+    surname    varchar(50)  not null,
+    phone      integer,
+    mail       varchar(100) not null,
+    password   varchar(200) not null
+);
+
+comment on table "Menagers" is 'contain managers';
+
+comment on column "Menagers".password is 'encrypted password';
+
+alter table "Menagers"
+    owner to avauser;
+
+create table "Emploee"
+(
+    emploee_id integer generated always as identity
+        constraint emploee_pk
+            primary key,
+    name       varchar(50)  not null,
+    surname    varchar(50)  not null,
+    mail       varchar(100) not null,
+    phone      integer,
+    password   varchar(200) not null
+);
+
+comment on column "Emploee".password is 'ewncrypted';
+
+alter table "Emploee"
+    owner to avauser;
+
+create table "Groups"
+(
+    group_id   integer      not null
+        constraint groups_pk
+            primary key,
+    group_name varchar(100) not null,
+    owner_id   integer      not null
+        constraint "Groups_Menagers_null_fk"
+            references "Menagers"
+            on update cascade on delete cascade
+);
+
+alter table "Groups"
+    owner to avauser;
+
+create table "Mangers-Groups"
+(
+    manager_id integer not null
+        constraint "Mangers-Groups_Menagers_null_fk"
+            references "Menagers"
+            on update cascade on delete cascade,
+    group_id   integer not null
+        constraint "Mangers-Groups_Groups_null_fk"
+            references "Groups"
+            on update cascade on delete cascade
+);
+
+alter table "Mangers-Groups"
+    owner to avauser;
+
+create table "Calendar"
+(
+    calendar_id integer not null
+        constraint "Calendar_pk"
+            primary key,
+    owner_id    integer not null
+        constraint "Calendar_Emploee_null_fk"
+            references "Emploee"
+            on update cascade on delete cascade,
+    group_id    integer
+        constraint "Calendar_Groups_null_fk"
+            references "Groups"
+            on update cascade on delete cascade
+);
+
+alter table "Calendar"
+    owner to avauser;
+
+create table "Shifts"
+(
+    shift_id   integer not null
+        constraint "Shifts_pk"
+            primary key,
+    start_time date    not null,
+    end_time   date    not null,
+    calendar   integer
+        constraint "Shifts_Calendar_null_fk"
+            references "Calendar"
+);
+
+alter table "Shifts"
+    owner to avauser;
+
