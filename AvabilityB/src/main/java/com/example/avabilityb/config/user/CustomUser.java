@@ -17,7 +17,7 @@ public class CustomUser implements UserDetails {
     private final UserEntity user;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.<GrantedAuthority>singletonList(new SimpleGrantedAuthority("User"));
+        return Collections.<GrantedAuthority>singletonList(new SimpleGrantedAuthority(user.getRole().toString()));
     }
 
     @Override
@@ -27,7 +27,7 @@ public class CustomUser implements UserDetails {
 
     @Override
     public String getUsername() {
-        return user.getUsername();
+        return user.getMail();
     }
 
     @Override

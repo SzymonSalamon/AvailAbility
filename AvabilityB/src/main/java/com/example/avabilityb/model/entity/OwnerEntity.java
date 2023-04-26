@@ -16,7 +16,7 @@ public class OwnerEntity {
     @Column(name = "owner_id")
     private Integer ownerId;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "manager_id", nullable = false)
     private ManagerEntity manager;
 }

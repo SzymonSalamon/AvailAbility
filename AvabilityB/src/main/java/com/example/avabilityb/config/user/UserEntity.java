@@ -16,15 +16,20 @@ public class UserEntity {
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(
             name = "UUID",
-            strategy = "org.hibernate.id.UUIDGenerator"
+            strategy = "org.hibernate.id.UUIDGenertor"
     )
     @Column(name = "id", nullable = false, updatable = false)
     private UUID id;
-    @Column(name = "username", nullable = false)
-    private String username;
+    @Column(name = "mail", nullable = false)
+    private String mail;
     @Column(name = "password")
     private String password;
     @Column(name = "enabled")
     private boolean enabled = true;
+    @Column(name="role")
+    private Role role;
 
+    public CustomUser asCustomUser(){
+        return new CustomUser(this);
+    }
 }

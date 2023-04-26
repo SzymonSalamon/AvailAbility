@@ -17,7 +17,7 @@ public class CalendarEntity {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "owner_id")
+    @JoinColumn(name = "employee_id")
     private EmployeeEntity employee;
 
     @ManyToOne

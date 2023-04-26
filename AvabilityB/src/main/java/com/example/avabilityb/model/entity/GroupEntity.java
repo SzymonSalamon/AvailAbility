@@ -19,7 +19,7 @@ public class GroupEntity {
     @Column(name = "group_name")
     private String name;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "owner_id")
     private ManagerEntity owner;
 

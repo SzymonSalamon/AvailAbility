@@ -17,6 +17,7 @@ import com.example.avabilityb.model.enums.*;
 public class Event {
     String eventId;
     String eventOwnerId;
+
     LocalDate StartDate;
     LocalDate EndDate;
     EventStatus eventStatus;

@@ -1,11 +1,22 @@
 package com.example.avabilityb.config.registration;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import jakarta.validation.constraints.*;
 
-@Getter
-@Setter
+@Data
 public class RegistrationRequest {
-    private String username;
+    @NotBlank
+    private String name;
+
+    @NotBlank
+    private String surname;
+
+    @NotBlank
+    @Email
+    private String email;
+
+    @NotBlank
     private String password;
+
+    private Integer phone;
 }

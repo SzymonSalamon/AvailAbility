@@ -30,4 +30,7 @@ public class EmployeeEntity {
     @Column(name = "password")
     private String password;
 
+    @Column(name = "user_id")
+    private Long user_id;
+
 }
