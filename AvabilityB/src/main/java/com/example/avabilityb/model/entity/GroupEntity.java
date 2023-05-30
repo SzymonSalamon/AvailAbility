@@ -4,18 +4,17 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Getter
 @Setter
-@Table(name = "Groups")
+@Table(name = "groups")
 public class GroupEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "group_id")
-    private Integer id;
+    private Long id;
 
     @Column(name = "group_name")
     private String name;
@@ -24,7 +23,5 @@ public class GroupEntity {
     @JoinColumn(name = "owner_id")
     private UserEntity owner;
 
-    @OneToMany(mappedBy = "group")
-    private List<CalendarEntity> calendars;
 }
 

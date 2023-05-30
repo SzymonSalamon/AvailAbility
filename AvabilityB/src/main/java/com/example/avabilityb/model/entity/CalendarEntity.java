@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
-@Table(name = "Calendar")
+@Table(name = "calendar")
 public class CalendarEntity {
 
     @Id

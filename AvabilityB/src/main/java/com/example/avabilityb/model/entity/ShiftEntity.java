@@ -9,7 +9,7 @@ import java.security.Timestamp;
 @Entity
 @Getter
 @Setter
-@Table(name = "Shifts")
+@Table(name = "shifts")
 public class ShiftEntity {
 
     @Id

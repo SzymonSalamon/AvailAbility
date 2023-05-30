@@ -33,5 +33,4 @@ public class ManagerEntity {
 
     @Column(name = "user_id")
     private Long user_id;
-
 }
