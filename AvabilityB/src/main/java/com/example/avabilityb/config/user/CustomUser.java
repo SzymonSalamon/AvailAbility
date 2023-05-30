@@ -1,5 +1,6 @@
 package com.example.avabilityb.config.user;
 
+import com.example.avabilityb.model.entity.UserEntity;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;

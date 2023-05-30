@@ -3,7 +3,8 @@ package com.example.avabilityb.model.entity;
 import lombok.Getter;
 import lombok.Setter;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -21,7 +22,9 @@ public class GroupEntity {
 
     @OneToOne
     @JoinColumn(name = "owner_id")
-    private ManagerEntity owner;
+    private UserEntity owner;
 
-
+    @OneToMany(mappedBy = "group")
+    private List<CalendarEntity> calendars;
 }
+

@@ -3,8 +3,8 @@ package com.example.avabilityb.model.entity;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.*;
 import java.security.Timestamp;
-import jakarta.persistence.*;
 
 @Entity
 @Getter

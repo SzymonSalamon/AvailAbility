@@ -1,7 +1,10 @@
 package com.example.avabilityb.config.login;
 
 import lombok.Data;
-import jakarta.validation.constraints.*;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+
 
 @Data
 public class LoginRequest {

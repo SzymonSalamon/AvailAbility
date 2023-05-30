@@ -1,7 +1,10 @@
-package com.example.avabilityb.config.registration;
+package com.example.avabilityb.config.registration.dto;
 
 import lombok.Data;
-import jakarta.validation.constraints.*;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+
 
 @Data
 public class RegistrationRequest {
@@ -13,7 +16,7 @@ public class RegistrationRequest {
 
     @NotBlank
     @Email
-    private String email;
+    private String mail;
 
     @NotBlank
     private String password;

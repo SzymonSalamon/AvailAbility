@@ -3,7 +3,7 @@ package com.example.avabilityb.model.entity;
 import lombok.Getter;
 import lombok.Setter;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 @Entity
 @Getter
@@ -17,6 +17,6 @@ public class OwnerEntity {
     private Integer ownerId;
 
     @OneToOne
-    @JoinColumn(name = "manager_id", nullable = false)
-    private ManagerEntity manager;
+    @JoinColumn(name = "user_id", nullable = false)
+    private UserEntity manager;
 }

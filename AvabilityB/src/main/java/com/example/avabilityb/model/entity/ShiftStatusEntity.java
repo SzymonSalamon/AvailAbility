@@ -3,7 +3,7 @@ package com.example.avabilityb.model.entity;
 import lombok.Getter;
 import lombok.Setter;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 @Entity
 @Getter
@@ -17,6 +17,6 @@ public class ShiftStatusEntity {
     private Integer id;
 
     @Column(name = "status_name")
-    private Integer name;
+    private String name;
 
 }

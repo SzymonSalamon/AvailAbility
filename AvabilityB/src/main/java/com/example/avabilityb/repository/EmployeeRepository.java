@@ -1,16 +1,16 @@
 package com.example.avabilityb.repository;
 
-import com.example.avabilityb.model.entity.EmployeeEntity;
+import com.example.avabilityb.model.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 import java.util.UUID;
 @Repository
-public interface EmployeeRepository extends JpaRepository<EmployeeEntity, UUID> {
+public interface EmployeeRepository extends JpaRepository<UserEntity, UUID> {
 
-    Optional<EmployeeEntity> findByEmail(String Email);
+    Optional<UserEntity> findByMail(String mail);
 
-    boolean existsByEmail(String Email);
+    boolean existsByMail(String mail);
 
 }

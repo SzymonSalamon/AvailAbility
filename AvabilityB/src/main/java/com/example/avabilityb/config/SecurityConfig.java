@@ -1,13 +1,12 @@
 package com.example.avabilityb.config;
 
 import com.example.avabilityb.config.jwt.JwtConfig;
+import com.example.avabilityb.config.jwt.filters.JwtTokenVerifier;
+import com.example.avabilityb.config.jwt.filters.JwtUsernamePasswordAuthenticationFilter;
+import com.example.avabilityb.config.user.CustomUserDetailsService;
 import com.example.avabilityb.repository.UserRepository;
-import com.example.avabilityb.service.CustomUserDetailsService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import com.example.avabilityb.service.AuthorizedUserFacade;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -16,7 +15,6 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -24,9 +22,11 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 
 import javax.crypto.SecretKey;
+import java.util.Arrays;
 
-@Configuration
 @EnableWebSecurity
+@Configuration
+@RequiredArgsConstructor
 public class SecurityConfig {
     private final UserRepository userRepository;
     private final JwtConfig jwtConfig;
@@ -54,38 +54,7 @@ public class SecurityConfig {
             // -- Swagger UI v3 (OpenAPI)
             "/v3/api-docs/**",
     };
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    private CustomUserDetailsService userDetailsService;
-
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService);
-    }
-
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests()
-                .antMatchers("/api/login").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .csrf().disable()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
-    }
-
-    @Bean
-    public JwtAuthenticationFilter jwtAuthenticationFilter() {
-        return new JwtAuthenticationFilter();
-    }
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
@@ -104,5 +73,33 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         return http.build();
 
+    }
+    @Bean
+    UserDetailsService userDetailsService() {
+        return new CustomUserDetailsService(userRepository);
+    }
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+    }
+
+    @Bean
+    public DaoAuthenticationProvider daoAuthenticationProvider() {
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        provider.setPasswordEncoder(this.passwordEncoder());
+        provider.setUserDetailsService(this.userDetailsService());
+        return provider;
+    }
+    @Bean
+    public AuthenticationManager authenticationManager() {
+        return new ProviderManager(Arrays.asList(daoAuthenticationProvider()));
+    }
+    @Bean
+    public AuthorizedUserFacade authorizedUserFacade() {
+        return new AuthorizedUserFacade(userRepository);
+    }
+    @Bean
+    public AuthenticationEntryPoint authenticationEntryPoint() {
+        return new CustomAuthenticationEntryPoint();
     }
 }

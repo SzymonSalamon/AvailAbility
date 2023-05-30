@@ -3,7 +3,7 @@ package com.example.avabilityb.model.entity;
 import lombok.Getter;
 import lombok.Setter;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 @Entity
 @Getter
@@ -14,15 +14,15 @@ public class CalendarEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "calendar_id")
-    private Integer id;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "employee_id")
-    private EmployeeEntity employee;
+    private UserEntity user;
 
     @ManyToOne
     @JoinColumn(name = "group_id")
     private GroupEntity group;
-
 }
+
 
