@@ -45,12 +45,22 @@ class Calendar extends Component<CalendarProps, CalendarState> {
     const modal = await DayPilot.Modal.prompt("Create a new event:", "Zmiana");
     dp.clearSelection();
     if (!modal.result) { return; }
-    dp.events.add({
+    
+    const newEvent: Shift = {
+      id: DayPilot.guid(),
+      title: modal.result,
       start: args.start,
       end: args.end,
-      id: DayPilot.guid(),
-      text: modal.result
-    });
+    };
+    
+    dp.events.add(newEvent);
+    
+    this.props.events.push(newEvent); // Update the parent component's events array
+    this.forceUpdate(); // Re-render the component with updated events
+    
+    // Optional: You can also update the shifts state if needed
+    const updatedShifts = [...this.props.events, newEvent];
+    this.setState({ shifts: updatedShifts });
   };
 
   private onBeforeEventRender = (args: DayPilot.BeforeEventRenderEventArgs) => {
