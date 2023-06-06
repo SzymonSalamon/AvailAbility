@@ -97,3 +97,18 @@
     border-width: 0 0.15em 0.15em 0;
     transform: rotate(45deg);
    }
+   .button-delete {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 17px;
+    height: 17px;
+    background-color: red;
+    border-radius: 50%;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    cursor: pointer;
+  }

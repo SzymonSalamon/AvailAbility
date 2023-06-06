@@ -19,6 +19,8 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
     @Query("SELECT c.user FROM CalendarEntity c WHERE c.group.id = :groupId")
     List<UserEntity> findAllByGroupId(@Param("groupId") Long groupId);
 
+    @Query("SELECT u FROM UserEntity u JOIN CalendarEntity c ON u = c.user JOIN GroupEntity g ON g = c.group WHERE g.owner = :manager")
+    List<UserEntity> findAllByManagerId(@Param("manager") UserEntity manager);
 
 
 

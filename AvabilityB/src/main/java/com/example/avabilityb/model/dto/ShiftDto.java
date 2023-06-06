@@ -1,19 +1,18 @@
 package com.example.avabilityb.model.dto;
 
-import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
-@Builder
-
+@NoArgsConstructor
 public class ShiftDto {
-    private Long shiftId;
-    private Timestamp startTime;
-    private Timestamp endTime;
+    private  long id;
+    private LocalDateTime start;
+    private LocalDateTime end;
     private String title;
-    private Long calendarId;
-    private Long shiftStatusId;
+
 }

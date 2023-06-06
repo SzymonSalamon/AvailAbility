@@ -1,6 +1,7 @@
 package com.example.avabilityb.service;
 
 
+import com.example.avabilityb.model.dto.UserDto;
 import com.example.avabilityb.model.entity.UserEntity;
 import com.example.avabilityb.repository.GroupRepository;
 import com.example.avabilityb.repository.UserRepository;
@@ -11,6 +12,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -31,9 +34,36 @@ public class UserService {
         }
     }
 
+    public List<UserDto> getUsersByManagerId(Long userId) {
+        if (userRepository.existsById(userId)) {
+            UserEntity manager = getUserById(userId);
+
+            return userRepository.findAllByManagerId(manager).stream()
+                    .map(this::UserEntityToUserDto)
+                    .collect(Collectors.toList());
+        } else {
+            throw new IllegalArgumentException("Invalid manager ID");
+        }
+    }
+
     public UserEntity getUserById(Long userId) {
         return userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user ID"));
+    }
+    public UserEntity getUserByMail(String mail){
+        Optional<UserEntity> user = userRepository.findByMail(mail);
+        if(user.isEmpty()){
+            throw new IllegalArgumentException("User with this email don't exist");
+        }
+        return user.get();
+    }
+    private UserDto UserEntityToUserDto(UserEntity userEntity){
+        return UserDto.builder()
+                .id(userEntity.getId())
+                .mail(userEntity.getMail())
+                .firstName(userEntity.getName())
+                .lastName(userEntity.getSurname())
+                .build();
     }
     public String getCurrentUsername() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -53,5 +83,8 @@ public class UserService {
     }
     public UserEntity getCurrentUserEntity() {
         return userRepository.findById(getCurrentUserId()).get();
+    }
+    public UserDto getCurrentUserDto(){
+        return UserEntityToUserDto(getCurrentUserEntity());
     }
 }

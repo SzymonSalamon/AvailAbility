@@ -120,14 +120,14 @@ class Calendar extends Component<CalendarProps, CalendarState> {
   }
 }
 
-function ShiftCalendar(): JSX.Element {
+function ShiftCalendar({ username }: { username: string | null }): JSX.Element {
   const [shifts, setShifts] = useState<Shift[]>([]);
   const lastClickedEventRef = useRef<DayPilot.EventObject | null>(null);
   const [initialLoad, setInitialLoad] = useState(true);
 
-  const fetchShifts = async () => {
+  const fetchShifts = async (username: string | null | undefined) => {
     try {
-      const response = await fetchApi('/shifts', {
+      const response = await fetchApi(`/shifts/${username}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -141,15 +141,15 @@ function ShiftCalendar(): JSX.Element {
   };
 
   useEffect(() => {
-    fetchShifts();
-  }, []);
+    fetchShifts(username);
+  }, [username]);
 
   const onEventsChange = async (newEvents: Shift[]) => {
     // Update the local state immediately
     setShifts(newEvents);
-
+  
     try {
-      await fetchApi('/addshifts', {
+      await fetchApi(`/addshifts/${username}`, { // Assuming 'username' is accessible in this scope
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -160,7 +160,7 @@ function ShiftCalendar(): JSX.Element {
       console.error('Error updating shifts:', error);
     } finally {
       // Fetch shifts again to ensure local state matches the server's state
-      fetchShifts();
+      fetchShifts(username);
     }
   };
 

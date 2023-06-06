@@ -8,7 +8,8 @@ import Main from "./pages/Main";
 import Login from "./pages/Login";
 import { removeToken } from "./utils/auth";
 import Register from "./pages/Register";
-import CameraComponent from "./components/Camera/CameraComponent";
+
+import Manage from "./pages/Manage";
 const logout = () => {
   removeToken();
   return redirect("/login");
@@ -19,6 +20,7 @@ const BrowserRouter = createBrowserRouter([
   { path: "/login", element: <Login />, id: "login" },
   { path: "/register", element: <Register />, id: "register" },
   { path: "/logout", id: "logout", loader: logout },
+  { path: "/manage", id: "manage", element:<Manage/>},
   { path: "*", element: <div>Not found</div>, id: "not-found" },
 ]);
 

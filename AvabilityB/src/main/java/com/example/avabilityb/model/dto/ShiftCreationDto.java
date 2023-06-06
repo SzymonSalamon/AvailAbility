@@ -11,10 +11,11 @@ import java.time.LocalDateTime;
 @Setter
 @Builder
 public class ShiftCreationDto {
+    private Long id;
     private String title;
     @NotNull
-    private LocalDateTime startTime;
+    private LocalDateTime start;
     @NotNull
-    private LocalDateTime endTime;
+    private LocalDateTime end;
 }
 

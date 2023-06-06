@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getToken } from "../utils/auth";
-import ShiftCalendar from "../components/Calendar/Calendar";
-//import ShiftCalendar from "../components/Calendar/Calendar3";
-import NaviBar from "../components/NaviBar/NaviBar";
+import ShiftCalendar from "../components/Calendar/ManageCalendar";
 
-const Main = () => {
+import NaviBar from "../components/NaviBar/NaviBar";
+const queryParams = new URLSearchParams(location.search);
+const username = queryParams.get('username');
+const Manage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -20,13 +21,10 @@ const Main = () => {
     <div className="z-5 flex w-screen flex-col bg-gray-700 h-screen">
       <NaviBar></NaviBar>
      
-      <ShiftCalendar/>
+      <ShiftCalendar username={username}/>
      
     </div>
   );
 };
 
-export default Main;
-
-
-
+export default Manage;

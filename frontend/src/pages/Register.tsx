@@ -19,9 +19,9 @@ const Register = () => {
   };
 
   return (
-    <div className="flex items-start justify-center sm:justify-start dark:bg-gray-900 dark:border-gray-700">
+    <div className="flex items-start justify-center sm:justify-start dark:bg-gray-900 dark:border-gray-700 ">
 
-      <div className=" z-10  h-screen bg-zinc-200 sm:shadow-lg">
+      <div className=" z-10  h-screen bg-zinc-200 sm:shadow-lg w-full sm:w-fit">
         <div
           className="g-6 flex h-full text-neutral-800 flex-col justify-center" >
           <div className="w-full">
@@ -47,15 +47,13 @@ const Register = () => {
           </div>
         </div>
       </div>
-      <div className="flex justify-center justify-items-center h-screen w-screen">
+      <div className="flex justify-center justify-items-center h-screen w-screen hidden sm:block">
       <img
                         className="mx-auto w-auto p-40"
                         src="/public/backgorund_banner.png"
                         alt="logo" />
       </div>
-      <div className="hidden sm:block">
- 
-      </div>
+     
     </div>
   );
 };

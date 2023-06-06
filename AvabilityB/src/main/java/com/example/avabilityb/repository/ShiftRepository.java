@@ -12,9 +12,10 @@ public interface ShiftRepository extends JpaRepository<ShiftEntity, Long> {
 
     @Query(value = "SELECT s.* FROM Shifts s " +
             "INNER JOIN Calendar c ON c.calendar_id = s.calendar_id " +
-            "INNER JOIN Employee e on c.employee_id = e.employee_id" +
-            "INNER JOIN Shift_Status ss ON s.shift_status = ss.status_id"+
-            "WHERE  = e.employee_id :EmployeeId", nativeQuery = true)
-    List<ShiftEntity> findAllByEmployeeId(@Param("EmployeeId") String EmployeeId);
+            "INNER JOIN Users u on c.employee_id = u.user_id " +
+            "INNER JOIN Shift_Status ss ON s.shift_status = ss.status_id " +
+            "WHERE u.user_id = :employeeId", nativeQuery = true)
+    List<ShiftEntity> findAllByEmployeeId(@Param("employeeId") Long employeeId);
+
 
 }
